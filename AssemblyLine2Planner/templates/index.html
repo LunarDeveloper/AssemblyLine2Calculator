@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Factory Resource Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Factory Resource Planner</h1>
+    <form id="craftingForm">
+        <label for="item_name">Item Name:</label>
+        <input type="text" id="item_name" name="item_name" required>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1" required>
+
+        <button type="submit">Calculate Resources</button>
+    </form>
+    <pre id="output"></pre>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
