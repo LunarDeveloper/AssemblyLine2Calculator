@@ -127,4 +127,4 @@ def print_resources(item_name, quantity):
 
 # Calculate resources needed to craft 1 AI Robot
 #print_resources("circuit", 1)
-print_crafting_tree("ai_robot", 1)
+#print_crafting_tree("ai_robot", 1)
