@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import CraftingForm from './components/CraftingForm';
+import TreeVisualization from './components/TreeVisualization';
 
 function App() {
+  const [nodes, setNodes] = useState([]);
+  const [edges, setEdges] = useState([]);
+
+  const handleCalculate = (itemName, quantity) => {
+    fetch('http://localhost:5000/calculate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ item_name: itemName, quantity: quantity }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.nodes && data.edges) {
+          setNodes(data.nodes);
+          setEdges(data.edges);
+        } else {
+          console.error('Error:', data.error);
+        }
+      })
+      .catch((error) => console.error('Error:', error));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Factory Resource Planner</h1>
+      <CraftingForm onCalculate={handleCalculate} />
+      <TreeVisualization nodes={nodes} edges={edges} />
     </div>
   );
 }
